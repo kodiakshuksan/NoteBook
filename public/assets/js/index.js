@@ -1,3 +1,7 @@
+import htmlLinks from 'assets/routes/html_routes';
+
+htmlLinks();
+
 let noteTitle;
 let noteText;
 let saveNoteBtn;
@@ -178,3 +182,5 @@ if (window.location.pathname === '/notes') {
 }
 
 getAndRenderNotes();
+
+module.exports = stack;
