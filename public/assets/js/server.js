@@ -1,33 +1,90 @@
-// create server
+// DEPENDENCIES
+// Series of npm packages that we will use to give our server useful functionality
 
-// Dependencies
 const express = require('express');
-const path = require('path');
+// This sets up the basic properties for our express server
 
+// Tells node that we are creating an "express" server
 const app = express();
 
-//CREATE PORT
-const PORT = 3000;
+// Sets an initial port. We"ll use this later in our listener
+const PORT = process.env.PORT || 3000;
+
 
 // Sets up the Express app to handle data parsing
+var bodyParser = require('body-parser');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 
-//router
-// require('./routes/apiRoutes')(app);
-require('/routes/html_routes.js')(app);
+// res.type('.html')
+// // => 'text/html'
+// res.type('html')
+// // => 'text/html'
+// res.type('json')
+// // => 'application/json'
+// res.type('application/json')
+// // => 'application/json'
+// res.type('png')
+// => 'image/png'
+// ROUTER
+// The below points our server to a series of "route" files.
+// These routes give our server a "map" of how to respond when users visit or request data from various URLs.
 
 
+// // respond with "hello world" when a GET request is made to the new notes page
+app.get(`http://localhost:` + PORT + `/public/index.html`), function (req, res) {
+    res.send("hello")
+    console.log(`http://localhost:` + PORT + `/public/index.html`)
+};
 
-// Listener
-//app.listen(PORT, () => console.log(`App listening on PORT ${PORT}`));
 
+app.get(`http://localhost:` + PORT + `/public/notes.html`), function (req, res) {
+    res.send(`http://localhost:` + PORT + `/public/notes.html`)
+}
+
+app.put(`/` + PORT + `/api/db.json`), (req, res) => {
+    // req.body hosts is equal to the JSON post sent from the user
+    // This works because of our body parsing middleware
+    const newNote = req.body;
+
+    console.log(newNote);
+
+    // We then add the json the user sent to the character array
+    notes.push(newNote);
+
+    // We then display the JSON to the users
+    res.json(newNote);
+};
+
+app.post(`/` + PORT + `/api/db.json`), (req, res) => {
+    // req.body hosts is equal to the JSON post sent from the user
+    // This works because of our body parsing middleware
+    const newNote = req.body;
+
+    console.log(newNote);
+
+    // We then add the json the user sent to the character array
+    notes.push(newNote);
+
+    // We then display the JSON to the users
+    res.json(newNote) + `/notes.html`;
+};
+
+
+//require('./routes/apiRoutes')(app);
+//require('./routes/htmlRoutes')(app);
+
+// LISTENER
+// The below code effectively "starts" my server
 app.listen(PORT, () => {
-    console.log(`Server listening on: http://localhost:${PORT}`);
-})
+    console.log(`Server started! At http://localhost:` + PORT + `/ public / index.html`);
+});
+
 
 //create SERVER REQUESTS
+
+
 
 //TO DO: CREATE ROUTES//
 //ROUTES-HTML

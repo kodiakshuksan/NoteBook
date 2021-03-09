@@ -1,7 +1,3 @@
-import htmlLinks from 'assets/routes/html_routes';
-
-htmlLinks();
-
 let noteTitle;
 let noteText;
 let saveNoteBtn;
@@ -20,7 +16,7 @@ if (window.location.pathname === '/notes') {
 const show = (elem) => {
     elem.style.display = 'inline';
 };
-
+6
 // Hide an element
 const hide = (elem) => {
     elem.style.display = 'none';
@@ -37,6 +33,8 @@ const getNotes = () =>
         },
     });
 
+
+//fetching api storage area to save new note in using POST method?
 const saveNote = (note) =>
     fetch('/api/notes', {
         method: 'POST',
@@ -46,6 +44,7 @@ const saveNote = (note) =>
         body: JSON.stringify(note),
     });
 
+//fetching note by id and using delete method to delete note
 const deleteNote = (id) =>
     fetch(`/api/notes/${id}`, {
         method: 'DELETE',
@@ -54,6 +53,8 @@ const deleteNote = (id) =>
         },
     });
 
+//first function to use for when the new notes page comes up the second one with text area
+//this hides the save button and looks to see if you are editing a note???? or wanting to add a new note
 const renderActiveNote = () => {
     hide(saveNoteBtn);
 
@@ -110,6 +111,7 @@ const handleNewNoteView = (e) => {
     renderActiveNote();
 };
 
+//makes sure there is data in the text areas for title and text and that determines whether or not the saveNoteButton will appear and when
 const handleRenderSaveBtn = () => {
     if (!noteTitle.value.trim() || !noteText.value.trim()) {
         hide(saveNoteBtn);
@@ -171,7 +173,7 @@ const renderNoteList = async (notes) => {
     }
 };
 
-// Gets notes from the db and renders them to the sidebar
+// Gets notes from the db and renders them to the sidebar?
 const getAndRenderNotes = () => getNotes().then(renderNoteList);
 
 if (window.location.pathname === '/notes') {
@@ -183,4 +185,3 @@ if (window.location.pathname === '/notes') {
 
 getAndRenderNotes();
 
-module.exports = stack;
