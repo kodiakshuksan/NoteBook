@@ -4,7 +4,7 @@ let saveNoteBtn;
 let newNoteBtn;
 let noteList;
 
-if (window.location.pathname === '/notes') {
+if (window.location.pathname) {
     noteTitle = document.querySelector('.note-title');
     noteText = document.querySelector('.note-textarea');
     saveNoteBtn = document.querySelector('.save-note');
@@ -16,7 +16,7 @@ if (window.location.pathname === '/notes') {
 const show = (elem) => {
     elem.style.display = 'inline';
 };
-6
+
 // Hide an element
 const hide = (elem) => {
     elem.style.display = 'none';
@@ -34,7 +34,7 @@ const getNotes = () =>
     });
 
 
-//fetching api storage area to save new note in using POST method?
+//  save new note in using POST method?
 const saveNote = (note) =>
     fetch('/api/notes', {
         method: 'POST',

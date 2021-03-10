@@ -1,88 +1,106 @@
-// DEPENDENCIES
-// Series of npm packages that we will use to give our server useful functionality
+// DEPENDENCIES AND VARIABLES
+
+console.log('hello world')
+
+const fs = require('fs');
+
+//file.readFile === fs.readFile 
+const path = require('path');
+
+//const { v4: uuidv4 } = require('uuid');
 
 const express = require('express');
-// This sets up the basic properties for our express server
+//console.log(path)
 
-// Tells node that we are creating an "express" server
+//const htmlRoutes = require('htmlRoutes');
+
+
+// Tells node that we are creating an "express" server with properties
 const app = express();
+
 
 // Sets an initial port. We"ll use this later in our listener
 const PORT = process.env.PORT || 3000;
 
 
 // Sets up the Express app to handle data parsing
-var bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-
-// res.type('.html')
-// // => 'text/html'
-// res.type('html')
-// // => 'text/html'
-// res.type('json')
-// // => 'application/json'
-// res.type('application/json')
-// // => 'application/json'
-// res.type('png')
-// => 'image/png'
-// ROUTER
-// The below points our server to a series of "route" files.
-// These routes give our server a "map" of how to respond when users visit or request data from various URLs.
+//app.use(express.static('public'));
 
 
-// // respond with "hello world" when a GET request is made to the new notes page
-app.get(`http://localhost:` + PORT + `/public/index.html`), function (req, res) {
-    res.send("hello")
-    console.log(`http://localhost:` + PORT + `/public/index.html`)
+//app.use(express.static(path.join(__filename, 'public')));
+
+
+// the server is opened on the landing page 
+//when the START button is clicked a GET request is made to the new notes page
+//the server responds by redirecting user to the /notes page
+app.get('/' + PORT + `/public/index.html`), function (req, res) {
+    res.sendFile('/' + PORT + '/public/notes.html')
+    .catch(error => console.error(error))
 };
 
 
-app.get(`http://localhost:` + PORT + `/public/notes.html`), function (req, res) {
-    res.send(`http://localhost:` + PORT + `/public/notes.html`)
-}
-
-app.put(`/` + PORT + `/api/db.json`), (req, res) => {
-    // req.body hosts is equal to the JSON post sent from the user
-    // This works because of our body parsing middleware
-    const newNote = req.body;
-
-    console.log(newNote);
-
-    // We then add the json the user sent to the character array
-    notes.push(newNote);
-
-    // We then display the JSON to the users
-    res.json(newNote);
-};
-
+//write and save post when save button is clicked
 app.post(`/` + PORT + `/api/db.json`), (req, res) => {
-    // req.body hosts is equal to the JSON post sent from the user
-    // This works because of our body parsing middleware
-    const newNote = req.body;
-
-    console.log(newNote);
-
-    // We then add the json the user sent to the character array
-    notes.push(newNote);
-
-    // We then display the JSON to the users
-    res.json(newNote) + `/notes.html`;
+    //read note title
+    //read file to db.json and 
+    //write note title to db.json
+    //write note title to db.json
+    //include ids
 };
 
 
-//require('./routes/apiRoutes')(app);
-//require('./routes/htmlRoutes')(app);
+
+
+
+
+
+// // We then display the JSON to the users
+// res.json(newNote);
+// fs write note to /notes.html
+
+
+
+// const path = require('\\NoteBook\\public\\assets\\js\\server.js');
+// //const __dirname = NoteBook;
+// // ROUTING
+
+// htmlRoutes = (app) => {
+//     // => HTML GET Requests
+//     // Below code handles when users "visit" a page.
+//     // In each of the below cases the user is shown an HTML page of content
+
+//     app.get(`/` + `/public/index.html`, (req, res) => {
+//         res.sendFile(path.join(__dirname, './public/index.html'));
+//     });
+
+//     app.get(`/` + `/notes.html`, (req, res) => {
+//         res.sendFile(path.join(__dirname, `./db/notes.json`));
+//     });
+
+
+//     // landing page/home
+//     app.get('*', (req, res) => {
+//         res.sendFile(path.join(__dirname, `./public/index.html`));
+//     });
+// };
+
+// module.exports = htmlRoutes
+
+
+
+
 
 // LISTENER
 // The below code effectively "starts" my server
 app.listen(PORT, () => {
-    console.log(`Server started! At http://localhost:` + PORT + `/ public / index.html`);
+    console.log(`Server started! https://localhost:` + PORT + `/ public / index.html`);
 });
 
-
-//create SERVER REQUESTS
 
 
 
