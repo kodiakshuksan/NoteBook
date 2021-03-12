@@ -5,7 +5,7 @@ const fs = require('fs');
 var app = express();
 var path = require("path");
 
-var PORT = process.env.PORT || 3000;
+var PORT = process.env.PORT || 3001;
 
 // makes Express to parsing and file sending
 app.use(express.urlencoded({ extended: true }));
